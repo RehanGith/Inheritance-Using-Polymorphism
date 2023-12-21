@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -128,7 +129,19 @@ int main() {
 			cout << "Number of teachers: " << nt << endl;
 			cout << "Number of Student: " << ns << endl;
 			break;
-		case 5:
+		case 5: {
+			ofstream outfile;
+			outfile.open("inheritance.DAT", ios::out | ios::binary);
+			if (!outfile) {
+				cout << "Error opening File" << endl;
+				exit(-1);
+			}
+			outfile.write((char*)(&n), sizeof(n));
+			outfile.write((char*)(arr), n * sizeof(*arr));
+			break;
+		}
+		case 6:
+		case 7:
 			for (int i = 0; i < n; i++) {
 				delete arr[i];
 			}
